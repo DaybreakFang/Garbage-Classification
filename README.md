@@ -1,1 +1,4 @@
-# Garbage-Classification
+# 智慧垃圾分类 
+
+> 智慧垃圾分类是一款基于 uniapp 开发的 app 
+
