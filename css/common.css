@@ -1,0 +1,15 @@
+*{margin: 0;padding:0;}
+html,body{
+	background-color: #F3F3F1;
+}
+ul{
+	list-style: none;
+}
+input,button,textarea{
+	border: 0;
+	outline: none;
+}
+a{
+	color:#ccc;
+	text-decoration: none;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+	<body>
+		<header>
+			<h1>垃圾分类</h1>
+			<ul>
+				<li>
+					<i class="iconfont icon-huishouzhan"></i>
+					<span>回收站</span>
+				</li>
+				<li>
+					<i class="iconfont icon-shanchu"></i>
+					<span>垃圾站</span>
+				</li>
+				<li id="class">
+					<i class="iconfont icon-zhengli"></i>
+					<span>垃圾分类</span>
+				</li>
+			</ul>
+		</header>
+		<footer>
+			<div>
+				<i class="iconfont icon-yuyin" id="speech"></i>
+			</div>
+			<ul>
+				<li>
+					<i class="iconfont icon-banbenxinxi"></i>
+				</li>
+				<li>
+					<span>语音搜索</span>
+				</li>
+				<li id="search">
+					<i class="iconfont icon-chaxun"></i>
+				</li>
+			</ul>
+		</footer>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/flexible.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('#fafafa');
+
+				mui('footer').on('tap', '#speech', fStartRec)
+ 
+				function fStartRec() {
+				
+					plus.speech.startRecognize({
+						engine: 'iFly', // 选择 讯飞语音识别
+						punctuation: false // 识别结果中是否包含标点符号
+					}, (data) => {
+						console.log(data)
+						mui.openWindow({
+							url:'detail.html',
+							id:'detail',
+							extras:{
+								title:encodeURI(data)
+							}
+						})
+					}, 
+					() => mui.toast('语音识别失败',{duration:'long',type:'div'})
+					)
+					setTimeout(fStopRec,6000); 
+					}
+				
+				function fStopRec(){
+					plus.speech.stopRecognize();
+				}
+				
+				mui("header ul").on('tap','#class',function(){
+					mui.openWindow({
+						url:'classification.html',
+						id:'class'
+					})
+				})
+				
+				mui("footer ul").on('tap','#search',function(){
+					mui.openWindow({
+						url:'search.html',
+						id:'search'
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

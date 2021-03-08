@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" href="css/class.css">
+	</head>
+
+	<body>
+	
+		<div class='g-container'>
+				<header class="mui-bar mui-bar-nav">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<h1 class="mui-title">垃圾分类</h1>
+				</header>
+					
+				<section>
+					<div class="mui-slider">
+						<div class="mui-slider-group"></div>
+					</div>
+					<div class='scroll-list'>
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul id='scrollItem'></ul>
+							</div>
+						</div>
+					</div>
+				</section>	
+			</div>
+		<script src='js/flexible.js'></script>
+		<script src="js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function() {
+				mui.ajax('http://apis.juhe.cn/rubbish/category', {
+					data: {
+						key: 'dfe7a5dc90a9be32d35d15d5a06eb619'
+					},
+					success: (data) => {
+						var result = data.result;
+						mui.each(result, function(index, item) {
+							document.querySelector('.mui-slider-group').innerHTML +=
+								`
+			    					<div class="mui-slider-item">
+			    						<div>
+			    						<h3>${item.name}</h3>
+			    						<p>${item.explain}</p>
+			    						</div>
+			    					</div>
+			    				`;
+						});
+						fAddList(result[0]);
+						//初始化 页面滑动的item
+						mui('.mui-slider').slider().gotoItem(0);
+						document.querySelector('.mui-slider').addEventListener('slide',function(e){
+							
+							fAddList(result[e.detail.slideNumber]);
+						})
+					}
+				})
+				function fAddList(options){
+					
+					var sli = '';
+					var arr = options.common.split('、');
+					mui.each(arr,function(index,item){
+						sli += `
+						
+						<li data-title='${item}'>${item}</li>
+						`
+					})
+					mui("#scrollItem")[0].innerHTML = sli
+				}
+				mui('.mui-scroll-wrapper').scroll({
+					deceleration:.0005
+				})
+				
+				mui('#scrollItem').on('tap','li',function(){
+					let title = this.getAttribute('data-title');
+					mui.openWindow({
+						url:'detail.html',
+						id:'detail',
+						extras:{
+							title:encodeURI(title)
+						}
+					})
+				})
+				
+			})
+		</script>
+	</body>
+
+</html>

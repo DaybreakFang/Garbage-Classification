@@ -1,0 +1,11 @@
+section h2 {
+  padding-top: 2rem;
+  padding-left: .4rem; }
+
+section .detail-title {
+  padding-top: 2rem;
+  padding-bottom: 1.6rem;
+  text-align: center; }
+
+section .detail-list {
+  padding: 0 .5rem; }

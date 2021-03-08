@@ -1,0 +1,38 @@
+.search-input{
+	padding: .8rem;
+	input{
+		text-align: center;
+		border: 0.0625rem solid #ccc;
+		border-radius: 50px;
+		background-color: #fff;
+		&:focus{
+			text-align: left;
+		}
+	}
+}
+
+section{
+	color: #545454;
+	h2{
+		padding-top: 2rem;
+		padding-left: .5rem;
+	}
+	h3{
+		font-weight: bold;
+		padding: 0 .5rem;
+	}
+	.hot{
+		ul{
+			display: flex;
+			flex-wrap: wrap;
+			padding: .2rem .5rem;
+			li{
+				font-size: .3rem;
+				padding: .05rem .2rem;
+				margin-left: .3rem;
+				margin-top: .3rem;
+				background-color: #e2e2e2;
+			}
+		}
+	}
+}
